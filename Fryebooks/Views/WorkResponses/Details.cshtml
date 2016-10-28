@@ -1,0 +1,66 @@
+﻿@model Fryebooks.Models.WorkResponse
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WorkResponse</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Income.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Income.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkRequest.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkRequest.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeStarted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeStarted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeWorked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeWorked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Billable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Billable)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
