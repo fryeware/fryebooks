@@ -46,7 +46,7 @@ namespace Fryebooks.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ContactName,Address,Phone,Url,Email,OnBoardDate")] Client client)
+        public ActionResult Create([Bind(Include = "Id,Name,ContactName,Address,Phone,Url,Email,OnBoardDate,ImageUrl,Location")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace Fryebooks.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,ContactName,Address,Phone,Url,Email,OnBoardDate")] Client client)
+        public ActionResult Edit([Bind(Include = "Id,Name,ContactName,Address,Phone,Url,Email,OnBoardDate,ImageUrl,Location")] Client client)
         {
             if (ModelState.IsValid)
             {
