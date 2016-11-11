@@ -1,31 +1,230 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+    ViewBag.Title = "Index";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+@*<h2><img src="~/Images/logo3.png" style="height:40px;width:30px" />ryeware</h2>*@
+<link href="~/Content/Hompage.css" rel="stylesheet" />
+<div>
+    <h1 class="col-lg-12">
+        Welcome to Fryeware
+    </h1>  <!-- title text  -->
+    <h3 class="col-lg-12">Connecting technology together</h3>
+</div>
+<div class="row" style="height:800px">
+   
+</div> <!-- title row  -->
+<svg id="graph" width="1000" height="701" style="position:absolute; top:0; left:0"></svg>
+
+<style>
+.links line {
+  stroke: #000;
+  stroke-opacity: 0.6;
+  stroke-width: 2px;
+}
+
+.link {
+    stroke: #000;
+    stroke-width:2px;
+}
+
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.label {
+    pointer-events: none;
+    font: 12px sans-serif;
+    text-transform: uppercase;
+}
+
+</style>
+@*<script src='http://d3js.org/d3.v3.min.js'></script>*@
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<div>
+    <script>
+        //var height = 600;
+        //var width = 800;
+
+        //var nodes = [
+        //    { name: "cloud", xpos: "50", ypos: "10" },
+        //    { name: "desktop", xpos: "7", ypos: "10" },
+        //    { name: "mobile", xpos: "90", ypos: "10" },
+        //    { name: "network", xpos: "10", ypos: "50"  },
+        //    { name: "security", xpos: "10", ypos: "10" },
+        //    { name: "tools", xpos: "10", ypos: "20" },
+        //    { name: "web", xpos: "100", ypos: "2" }
+        //];
+
+        //var links = [
+        //    { source: 0, target: 1, distance: 200 },
+        //    { source: 1, target: 2, distance: 300 },
+        //    { source: 1, target: 3, distance: 400 },
+        //    { source: 1, target: 4, distance: 200 },
+        //    { source: 4, target: 5, distance: 300 },
+        //    { source: 5, target: 6, distance: 350 },
+        //    { source: 5, target: 4, distance: 350 },
+        //    { source: 4, target: 6, distance: 250 },
+        //    //{ source: 3, target: 5 },
+        //    //{ source: 3, target: 6 },
+        //    //{ source: 4, target: 5 },
+        //    //{ source: 4, target: 6 }
+        //];
+
+        //var svg = d3.select("#vis").append("svg")
+        //    .attr("width", width)
+        //    .attr("height", height)
+        //    .attr("pad-top", -50) ;
+
+        //var link = svg.selectAll(".link")
+        //    .data(links)
+        //    .enter().append("line")
+        //    .attr("class", "link");
+
+        ////var node = svg.selectAll(".node")
+        ////    .data(nodes)
+        ////    .enter().append("circle")
+        ////    .attr("class", "node")
+        ////    //.attr("cx", function (d) { return d.xpos })
+        ////    //.attr("cy", function (d) { return d.ypos })
+        ////    .attr("cx", function (d, i) { return (i+1)*(width/4) })
+        ////    .attr("cy", function (d, i) { return height/2 })
+        ////    .attr("r", width * 0.055);
+
+        //var node = svg.selectAll(".node")
+        //   .data(nodes)
+        //   .enter().append("g")
+        //    .attr("class", "node");
+
+        //node.append("image")
+        //    .attr("xlink:href", function (d) {
+        //        return "/Images/" + d.name + ".png";
+        //    })
+        //    .attr("x", function (d) { return -30; })
+        //    .attr("y", function (d) { return -30; })
+        //    .attr("height", 60)
+        //    .attr("width", 60);
+            
+        //node.append("text")
+        //    .attr("text-anchor", "middle")
+        //    .attr("dy", ".35em")
+        //    .attr("y", -42)
+        //    .attr("class", "label")
+        //    .text(function (d) { return d.name; });
+
+        //var force = d3.layout.force()
+        //    .size([width, height])
+        //    .nodes(nodes)
+        //    .links(links)
+        //    .on("tick", tick)
+        //    .linkDistance(function (d) { return d.distance; })
+        //    .gravity(.05)
+        //    .charge(-250)
+        //    .start();
+
+        //function tick() {
+        //    //node.attr("cx", function (d) { return d.x; })
+        //    //    .attr("cy", function (d) { return d.y; })
+        //    //    .call(force.drag);
+
+        //    node.attr("transform", function (d) {
+        //        return "translate(" + d.x + "," + d.y + ")";
+        //    })
+        //    .call(force.drag);
+
+        //    link.attr("x1", function (d) { return d.source.x; })
+        //        .attr("y1", function (d) { return d.source.y; })
+        //        .attr("x2", function (d) { return d.target.x; })
+        //        .attr("y2", function (d) { return d.target.y; })
+        //}
+
+
+        //$(document).ready(function () {
+        //    $('#mainBody').css('background-image', "graph");
+        //});
+
+        var svg = d3.select("svg"),
+                    width = +svg.attr("width"),
+                    height = +svg.attr("height");
+
+        var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+        var simulation = d3.forceSimulation()
+            .force("link", d3.forceLink().id(function (d) { return d.id; }).distance(200))
+            .force("charge", d3.forceManyBody())
+            .force("center", d3.forceCenter(width / 1.8, height / 1.5 ));
+
+        d3.json("/DataService/GetGData", function (error, graph) {
+            if (error) throw error;
+
+            var link = svg.append("g")
+                .attr("class", "links")
+              .selectAll("line")
+              .data(graph.links)
+              .enter().append("line")
+                .attr("stroke-width", function (d) { return Math.sqrt(d.value); });      
+
+            var node = svg.append("g")
+                .attr("class", "nodes")
+              .selectAll("circle")
+              .data(graph.nodes)
+              .enter().append("circle")
+                .attr("r", 25)
+                .attr("fill", function (d) { return color(d.group); })
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
+
+            node.append("title")
+                .text(function (d) { return d.id; });
+
+            simulation
+                .nodes(graph.nodes)
+                .on("tick", ticked);
+
+            simulation.force("link")
+                .links(graph.links);
+
+            function ticked() {
+                link
+                    .attr("x1", function (d) { return d.source.x; })
+                    .attr("y1", function (d) { return d.source.y; })
+                    .attr("x2", function (d) { return d.target.x; })
+                    .attr("y2", function (d) { return d.target.y; });
+
+                node
+                    .attr("cx", function (d) { return d.x; })
+                    .attr("cy", function (d) { return d.y; });
+            }
+        });
+
+        function dragstarted(d) {
+            if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(d) {
+            d.fx = d3.event.x;
+            d.fy = d3.event.y;
+        }
+
+        function dragended(d) {
+            if (!d3.event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+
+        simulation.alphaTarget(0.3).restart();
+        simulation.alphaTarget(0.3).restart();
+        simulation.alphaTarget(0.3).restart();
+
+    </script>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+

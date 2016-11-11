@@ -272,12 +272,13 @@ $.AdminLTE.pushMenu = function (toggleBtn) {
     }
     //Handle sidebar push menu for small screens
     else {
-      if ($("body").hasClass('sidebar-open')) {
-        $("body").removeClass('sidebar-open');
-        $("body").removeClass('sidebar-collapse')
-      } else {
-        $("body").addClass('sidebar-open');
-      }
+        $("body").toggleClass('sidebar-collapse');
+      //if ($("body").hasClass('sidebar-open')) {
+      //  $("body").removeClass('sidebar-open');
+      //  $("body").removeClass('sidebar-collapse')
+      //} else {
+      //  $("body").addClass('sidebar-open');
+      //}
     }
   });
 

@@ -84,6 +84,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -203,7 +205,9 @@
     <Compile Include="Controllers\AdminLteController.cs" />
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\DataServiceController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncomesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -245,15 +249,54 @@
     <Compile Include="Migrations\201610240219305_RedidIncomeToWR-Relations.Designer.cs">
       <DependentUpon>201610240219305_RedidIncomeToWR-Relations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610281832059_AddedFryebooksEntityModel.cs" />
+    <Compile Include="Migrations\201610281832059_AddedFryebooksEntityModel.Designer.cs">
+      <DependentUpon>201610281832059_AddedFryebooksEntityModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610291627130_AddedLocationToClient.cs" />
+    <Compile Include="Migrations\201610291627130_AddedLocationToClient.Designer.cs">
+      <DependentUpon>201610291627130_AddedLocationToClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Alert.cs" />
-    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Alert.cs">
+      <DependentUpon>FryebooksModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChartModel.cs" />
+    <Compile Include="Models\Client.cs">
+      <DependentUpon>FryebooksModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Expens.cs">
+      <DependentUpon>FryebooksModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\FryebooksModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FryebooksModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FryebooksModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FryebooksModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FryebooksModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FryebooksModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Income.cs" />
+    <Compile Include="Models\Income.cs">
+      <DependentUpon>FryebooksModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\WorkRequest.cs" />
+    <Compile Include="Models\PublicModel.cs" />
+    <Compile Include="Models\WorkRequest.cs">
+      <DependentUpon>FryebooksModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkRespons.cs">
+      <DependentUpon>FryebooksModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WorkResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -303,10 +346,33 @@
     <Content Include="Content\AdminLTE\skins\_all-skins.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Hompage.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\cloud.png" />
+    <Content Include="Images\ConnectedBackgrd.png" />
+    <Content Include="Images\ConnectedBackgrdBlur.png" />
+    <Content Include="Images\desktop.png" />
+    <Content Include="Images\logo-200x57.PNG" />
+    <Content Include="Images\logo-40x30.PNG" />
+    <Content Include="Images\mobile.png" />
+    <Content Include="Images\network.png" />
+    <Content Include="Images\security.png" />
+    <Content Include="Images\stack.png" />
+    <Content Include="Images\tools.png" />
+    <Content Include="Images\web.png" />
+    <Content Include="Models\FryebooksModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FryebooksModel.edmx</DependentUpon>
+      <LastGenOutput>FryebooksModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\FryebooksModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FryebooksModel.edmx</DependentUpon>
+      <LastGenOutput>FryebooksModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\AdminLTE\app.js" />
     <Content Include="Scripts\AdminLTE\app.min.js" />
     <Content Include="Scripts\AdminLTE\demo.js" />
@@ -810,17 +876,32 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\AdminLTE\plugins\ckeditor\LICENSE.md" />
-    <Content Include="Scripts\AdminLTE\plugins\ckeditor\plugins\scayt\LICENSE.md" />
-    <Content Include="Scripts\AdminLTE\plugins\ckeditor\plugins\scayt\README.md" />
-    <Content Include="Scripts\AdminLTE\plugins\ckeditor\plugins\wsc\LICENSE.md" />
-    <Content Include="Scripts\AdminLTE\plugins\ckeditor\plugins\wsc\README.md" />
-    <Content Include="Scripts\AdminLTE\plugins\ckeditor\README.md" />
-    <Content Include="Scripts\AdminLTE\plugins\ckeditor\skins\moono\readme.md" />
-    <Content Include="Scripts\AdminLTE\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Scripts\AdminLTE\plugins\input-mask\phone-codes\phone-codes.json" />
+    <Content Include="Scripts\AdminLTE\plugins\input-mask\phone-codes\phone-be.json" />
+    <Content Include="Scripts\AdminLTE\plugins\ckeditor\skins\moono\readme.md" />
+    <Content Include="Scripts\AdminLTE\plugins\ckeditor\README.md" />
+    <Content Include="Scripts\AdminLTE\plugins\ckeditor\plugins\wsc\README.md" />
+    <Content Include="Scripts\AdminLTE\plugins\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="Scripts\AdminLTE\plugins\ckeditor\plugins\scayt\README.md" />
+    <Content Include="Scripts\AdminLTE\plugins\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="Scripts\AdminLTE\plugins\ckeditor\LICENSE.md" />
     <Content Include="Scripts\AdminLTE\plugins\ckeditor\CHANGES.md" />
+    <EntityDeploy Include="Models\FryebooksModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FryebooksModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\FryebooksModel.edmx.diagram">
+      <DependentUpon>FryebooksModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Scripts\d3\d3.js" />
+    <Content Include="Scripts\d3\d3.min.js" />
+    <Content Include="Scripts\d3\README.md" />
+    <Content Include="Scripts\d3\LICENSE" />
+    <Content Include="Scripts\d3\CHANGES.md" />
+    <Content Include="Scripts\d3\API.md" />
+    <Content Include="Models\data.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Foggy.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -845,7 +926,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -866,11 +947,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Clients\Create.cshtml" />
-    <Content Include="Views\Clients\Delete.cshtml" />
-    <Content Include="Views\Clients\Details.cshtml" />
-    <Content Include="Views\Clients\Edit.cshtml" />
-    <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Expenses\Create.cshtml" />
     <Content Include="Views\Expenses\Delete.cshtml" />
     <Content Include="Views\Expenses\Details.cshtml" />
@@ -896,9 +972,22 @@
     <Content Include="Views\WorkResponses\Details.cshtml" />
     <Content Include="Views\WorkResponses\Edit.cshtml" />
     <Content Include="Views\WorkResponses\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminLteBreadcrumb.cshtml" />
+    <Content Include="Views\Shared\_AdminLteLayout.cshtml" />
+    <Content Include="Views\Shared\_AdminLteLeftMenu.cshtml" />
+    <Content Include="Views\Shared\_AdminLteTopMenu.cshtml" />
+    <Content Include="Views\Colors.cshtml" />
+    <Content Include="Views\Index.cshtml" />
+    <Content Include="Views\Clients\Create.cshtml" />
+    <Content Include="Views\Clients\Delete.cshtml" />
+    <Content Include="Views\Clients\Details.cshtml" />
+    <Content Include="Views\Clients\Edit.cshtml" />
+    <Content Include="Views\Clients\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DataService\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -933,6 +1022,15 @@
     <EmbeddedResource Include="Migrations\201610240219305_RedidIncomeToWR-Relations.resx">
       <DependentUpon>201610240219305_RedidIncomeToWR-Relations.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610281832059_AddedFryebooksEntityModel.resx">
+      <DependentUpon>201610281832059_AddedFryebooksEntityModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610291627130_AddedLocationToClient.resx">
+      <DependentUpon>201610291627130_AddedLocationToClient.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
