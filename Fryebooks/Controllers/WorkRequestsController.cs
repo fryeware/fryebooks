@@ -10,6 +10,7 @@ using Fryebooks.Models;
 
 namespace Fryebooks.Controllers
 {
+    [Authorize]
     public class WorkRequestsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

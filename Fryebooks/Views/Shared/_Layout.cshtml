@@ -45,20 +45,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                {
-                    @Html.ActionLink("Fryebooks", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                }
-                else
-                {
-                    @Html.ActionLink("Fryeware", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                }
-
+                @Html.ActionLink("Fryeware", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-            @if (HttpContext.Current.User.Identity.IsAuthenticated)
-            {
+                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
                         <li>@Html.ActionLink("Clients", "Index", "Clients")</li>
                         <li>@Html.ActionLink("Requests", "Index", "WorkRequests")</li>
                         <li>@Html.ActionLink("WorkLog", "Index", "WorkResponses")</li>
@@ -66,8 +58,7 @@
                         <li>@Html.ActionLink("Expenses", "Index", "Expenses")</li>
                         <li>@Html.ActionLink("Alerts", "Index", "Alerts")</li>
                         <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
-            }
-
+                }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
