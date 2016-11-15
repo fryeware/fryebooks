@@ -48,4 +48,17 @@ namespace Fryebooks.Models
         public List<double> latLng { get; set; }
         public string name { get; set; }
     }
+
+    public class CashflowObject
+    {
+        public int FlowTotal { get; set; }
+        public string FlowColor { get; set; }
+    }
+
+    public class AlertObject
+    {
+        public int DaysOld { get; set; }
+        public string ClassData { get; set; }
+        public Alert Alert { get; set; }
+    }
 }

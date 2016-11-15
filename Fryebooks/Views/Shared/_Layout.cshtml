@@ -51,12 +51,8 @@
                 <ul class="nav navbar-nav">
                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                 {
-                        <li>@Html.ActionLink("Clients", "Index", "Clients")</li>
-                        <li>@Html.ActionLink("Requests", "Index", "WorkRequests")</li>
-                        <li>@Html.ActionLink("WorkLog", "Index", "WorkResponses")</li>
-                        <li>@Html.ActionLink("Income", "Index", "Incomes")</li>
-                        <li>@Html.ActionLink("Expenses", "Index", "Expenses")</li>
-                        <li>@Html.ActionLink("Alerts", "Index", "Alerts")</li>
+                        <li>@Html.ActionLink("Fryebooks", "Index", "Fryebooks")</li>
+                        <li>@Html.ActionLink("Downloads", "Index", "Downloads")</li>
                         <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
                 }
                 </ul>

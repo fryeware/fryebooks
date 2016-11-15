@@ -1,19 +1,10 @@
 ﻿
 
-@*
-    This is the example main content of the AdminLTE demo and represents a good smattering of AdminLTE functionality in a cshtml
-    TODO: Delete this file when you're ready to start building your app
-*@
+@{
+    ViewBag.Title = "Fryebooks";
+}
 
 @{
-    // Layout set automatially in _ViewStart.cshtml
-
-    // EXAMPLE:
-    // Using the ViewBag on a page to set the title and sub-title
-    // This will cause the _AdminLteLayout to include this value in the page title
-    // And also set the top titles in the main content area of the page
-    ViewBag.Title = "Admin LTE";
-    ViewBag.TitleSmall = "Version 2.0";
 
     // EXAMPLE:
     // Using the Breadcrumb class to create a dynamically generated breadcrumb on the page with
@@ -33,12 +24,12 @@
             <div class="inner">
                 <h3>@ViewBag.NewWork</h3>
 
-                <p>New Work</p>
+                <p>New Jobs</p>
             </div>
             <div class="icon">
                 <i class="ion ion-bag" style="margin-top: 8px"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="/WorkRequests" class="small-box-footer">Job Detail <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->
@@ -48,12 +39,12 @@
             <div class="inner">
                 <h3>@ViewBag.CompletedWork</h3>
 
-                <p>Completed Work</p>
+                <p>Completed Jobs</p>
             </div>
             <div class="icon">
                 <i class="ion ion-stats-bars" style="margin-top: 8px"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="/WorkResponses" class="small-box-footer">Work Detail <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->
@@ -68,7 +59,7 @@
             <div class="icon">
                 <i class="ion ion-person-add" style="margin-top: 8px"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="/Clients" class="small-box-footer">Client Detail <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->
@@ -93,20 +84,6 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Income/Expense Report</h3>
-                <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <div class="btn-group">
-                        <button class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i></button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
             </div><!-- /.box-header -->
             <div class="box-body">
                 <div class="row">
@@ -145,28 +122,24 @@
                 <div class="row">
                     <div class="col-sm-3 col-xs-6">
                         <div class="description-block border-right">
-                            <h5 class="description-header">$@ViewBag.TotalIncome</h5>
-                            <span class="description-text">TOTAL INCOME</span>
+                            <h5><span class="description-header" style="color:black;font-weight:bold">$@ViewBag.IncomeObj.FlowTotal</span></h5>
+                            <a href="/Incomes"<span class="description-text" style="color:black">TOTAL INCOME</span></a>
                         </div><!-- /.description-block -->
                     </div><!-- /.col -->
                     <div class="col-sm-3 col-xs-6">
                         <div class="description-block border-right">
-                            <h5 class="description-header">$@ViewBag.TotalExpense</h5>
-                            <span class="description-text">TOTAL EXPENSE</span>
+                            <h5 class="description-header">@*$@ViewBag.ExpenseObj.FlowTotal*@</h5>
+                            <h5><span class="description-header" style="color:black;font-weight:bold">$@ViewBag.ExpenseObj.FlowTotal</span></h5>
+                            <a href="/Expenses"<span class="description-text" style="color:black">TOTAL EXPENSE</span></a>
                         </div><!-- /.description-block -->
                     </div><!-- /.col -->
                     <div class="col-sm-3 col-xs-6">
                         <div class="description-block border-right">
-                            <h5 class="description-header">$@ViewBag.TotalProfit</h5>
-                            <span class="description-text">TOTAL PROFIT</span>
+                            @*<h5 class="description-header">$@ViewBag.ProfitObj.FlowTotal</h5>*@
+                            <h5><span class="description-header" style="font-weight:bold;color:@ViewBag.ProfitObj.FlowColor">$@ViewBag.ProfitObj.FlowTotal</span></h5>
+                            <span class="description-text" style="color:black">PROFIT</span>
                         </div><!-- /.description-block -->
                     </div><!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                        <div class="description-block">
-                            <h5 class="description-header">@ViewBag.TotalJobsCompleted</h5>
-                            <span class="description-text">JOBS COMPLETED</span>
-                        </div><!-- /.description-block -->
-                    </div>
                 </div><!-- /.row -->
             </div><!-- /.box-footer -->
         </div><!-- /.box -->
@@ -195,81 +168,32 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <ul class="todo-list">
-                    <li>
-                        <!-- drag handle -->
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <!-- checkbox -->
-                        <input type="checkbox" value="">
-                        <!-- todo text -->
-                        <span class="text">@ViewBag.Alerts[0]</span>
-                        <!-- Emphasis label -->
-                        <small class="label label-danger"><i class="fa fa-clock-o"></i> @ViewBag.AlertDays[0] days</small>
-                        <!-- General tools such as edit or delete-->
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="">
-                        <span class="text">@ViewBag.Alerts[1]</span>
-                        <small class="label label-info"><i class="fa fa-clock-o"></i> @ViewBag.AlertDays[1] days</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="">
-                        <span class="text">@ViewBag.Alerts[2]</span>
-                        <small class="label label-warning"><i class="fa fa-clock-o"></i> @ViewBag.AlertDays[2] days</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="">
-                        <span class="text">@ViewBag.Alerts[3]</span>
-                        <small class="label label-success"><i class="fa fa-clock-o"></i> @ViewBag.AlertDays[3] days</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="">
-                        <span class="text">@ViewBag.Alerts[4]</span>
-                        <small class="label label-primary"><i class="fa fa-clock-o"></i> @ViewBag.AlertDays[4] days</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        <li>
+                            <!-- drag handle -->
+                            <span class="handle">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-ellipsis-v"></i>
+                            </span>
+                            <!-- todo text -->
+                            <span class="text">@ViewBag.Alerts[i].Alert.Description</span>
+                            <br />
+                            <!-- Emphasis label -->
+                            <small class="@ViewBag.Alerts[i].ClassData"><i class="fa fa-clock-o"></i> @ViewBag.Alerts[i].DaysOld days</small>
+                            <!-- General tools such as edit or delete-->
+                            <div class="tools">
+                                <a class="fa fa-edit" href="/Alerts/Edit/@ViewBag.Alerts[i].Alert.Id"></a>
+                                <a class="fa fa-trash-o" href="/Alerts/Delete/@ViewBag.Alerts[i].Alert.Id"></a>
+                            </div>
+                        </li>
+                    }
                 </ul>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
-                <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
+                @*<button type="button" onclick="todoClick()" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>*@
+                <a href="/Alerts/Create" class="btn btn-default">Add Item</a>
             </div>
         </div>
      </div>
@@ -316,7 +240,7 @@
                         </ul><!-- /.users-list -->
                     </div><!-- /.box-body -->
                     <div class="box-footer text-center">
-                        <a href="javascript::" class="uppercase">View All Clients</a>
+                        <a href="/Clients" class="uppercase">View All Clients</a>
                     </div><!-- /.box-footer -->
                 </div><!--/.box -->
             </div><!-- /.col -->
@@ -326,5 +250,6 @@
             @*NOTE: These should NOT be used in a production situation
                 They do contains useful snippets on how to setup charts*@
             <script src="~/Scripts/AdminLTE/pages/dashboard2.js"></script>
+            <script src="~/Scripts/Fryeware/custom.js"></script>
             <script src="~/Scripts/AdminLTE/demo.js"></script>
         }

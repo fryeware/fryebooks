@@ -8,7 +8,7 @@ using System.Web.Mvc;
 namespace Fryebooks.Controllers
 {
     [Authorize]
-    public class AdminController : Controller
+    public class FryebooksController : Controller
     {
         public ActionResult Index()
         {
@@ -16,12 +16,12 @@ namespace Fryebooks.Controllers
             ViewBag.CompletedWork = getCompletedWork();
             ViewBag.Clients = getClientCount();
             ViewBag.Accuracy = getAccuracy().ToString();
-            ViewBag.TotalIncome = getTotalIncome();
-            ViewBag.TotalExpense = getTotalExpense();
-            ViewBag.TotalProfit = Convert.ToInt32(ViewBag.TotalIncome) - Convert.ToInt32(ViewBag.TotalExpense);
+            ViewBag.IncomeObj = getTotalIncome();
+            ViewBag.ExpenseObj = getTotalExpense();
+            ViewBag.ProfitObj = getProfit(ViewBag.IncomeObj.FlowTotal, ViewBag.ExpenseObj.FlowTotal);
             ViewBag.TotalJobsCompleted = getTotalJobs();
-            ViewBag.Alerts = getAlerts();
-            ViewBag.AlertDays = getAlertDays();
+            ViewBag.Alerts = getAlertObjArray();
+            //ViewBag.AlertDays = getAlertDays();
             ViewBag.ClientObjects = getClients();
             return View();
         }
@@ -48,6 +48,36 @@ namespace Fryebooks.Controllers
                 clientData.Add(cco);
             }
             return clientData;
+        }
+
+        private dynamic getAlertObjArray()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            IQueryable<Alert> alerts = (from a in db.Alerts
+                                        where a.Enabled
+                                        select a).OrderBy(r => r.DueDate).Take(5);
+            List<AlertObject> alertData = new List<AlertObject>();
+            foreach (Alert a in alerts)
+            {
+                AlertObject ao = new AlertObject();
+                ao.DaysOld = Convert.ToInt32(a.DueDate.Subtract(DateTime.Now).TotalDays);
+                ao.Alert = a;
+                ao.ClassData =  "label label-success";
+                if (ao.DaysOld < -10)
+                {
+                    ao.ClassData = "label label-danger";
+                }
+                else if (ao.DaysOld < -5)
+                {
+                    ao.ClassData = "label label-warning";
+                }
+                else if (ao.DaysOld < -3)
+                {
+                    ao.ClassData = "label label-info";
+                }
+                alertData.Add(ao);
+            }
+            return alertData.ToArray();
         }
 
         private dynamic getAlerts()
@@ -98,7 +128,10 @@ namespace Fryebooks.Controllers
             }
             catch(Exception ex)
             { }
-            return totalIncome;
+            CashflowObject io = new CashflowObject();
+            io.FlowTotal = Convert.ToInt32(totalIncome);
+            io.FlowColor = "black";
+            return io;
         }
 
         private dynamic getTotalExpense()
@@ -106,7 +139,19 @@ namespace Fryebooks.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             double totalExpense = (from i in db.Expenses
                                   select i.ExpenseAmount).Sum();
-            return totalExpense;
+            CashflowObject cfo = new CashflowObject();
+            cfo.FlowTotal = Convert.ToInt32(totalExpense);
+            cfo.FlowColor = "black";
+            return cfo;
+        }
+
+        private dynamic getProfit(int income, int expense)
+        {
+            CashflowObject cfo = new CashflowObject();
+            cfo.FlowTotal = income - expense;
+            cfo.FlowColor = "black";
+            if (cfo.FlowTotal < 0) { cfo.FlowColor = "red"; }
+            return cfo;
         }
 
         public ActionResult About()

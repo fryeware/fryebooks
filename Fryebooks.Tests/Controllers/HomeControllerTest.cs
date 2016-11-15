@@ -16,7 +16,7 @@ namespace Fryebooks.Tests.Controllers
         public void Index()
         {
             // Arrange
-            AdminController controller = new AdminController();
+            FryebooksController controller = new FryebooksController();
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -29,7 +29,7 @@ namespace Fryebooks.Tests.Controllers
         public void About()
         {
             // Arrange
-            AdminController controller = new AdminController();
+            FryebooksController controller = new FryebooksController();
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -42,7 +42,7 @@ namespace Fryebooks.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            AdminController controller = new AdminController();
+            FryebooksController controller = new FryebooksController();
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;
