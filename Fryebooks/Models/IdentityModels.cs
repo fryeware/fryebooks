@@ -41,5 +41,7 @@ namespace Fryebooks.Models
         public System.Data.Entity.DbSet<Fryebooks.Models.Expense> Expenses { get; set; }
 
         public System.Data.Entity.DbSet<Fryebooks.Models.Alert> Alerts { get; set; }
+
+        //public System.Data.Entity.DbSet<Fryebooks.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

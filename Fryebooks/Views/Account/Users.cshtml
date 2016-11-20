@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Fryebooks.Models.UserViewModel>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>Users</h2>
+
+<div>
+    <hr />
+</div>
+<table id="tableMain" class="table">
+    <thead>
+        <tr>
+            <th>
+                User
+            </th>
+            <th>
+                Admin Role
+            </th>
+            <th>
+                Download Role
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasAdminRole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasDownloadRole)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+
+
+@*@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tableMain').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "/Account/Users"
+                },
+                columns: [
+                    {
+                        name: 'UserName',
+                        data: 'UserName',
+                        title: 'UserName',
+                        sortable: true,
+                        searchable: true
+                    },
+                    {
+                        name: 'HasAdminRole',
+                        data: 'HasAdminRole',
+                        title: 'HasAdminRole',
+                        sortable: true,
+                        searchable: true
+                    },
+                    {
+                        name: 'HasDownloadRole',
+                        data: 'HasDownloadRole',
+                        title: 'HasDownloadRole',
+                        sortable: true,
+                        searchable: true
+                    }
+                ],
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": "UserName"
+                },
+                {
+                    "targets": 1,
+                    "data": null,
+                    "render": function (data, type, row, meta) {
+                        if (data.HasAdminRole)
+                        {
+                            return '<div class="pull-right"><a href="/Places/Edit/' + row.PlaceID + '"><span class="glyphicon glyphicon-pencil" style="font-size: 20px;padding-left: 10px"></span></a><a href="/Places/Details/' + row.PlaceID + '"><span class="glyphicon glyphicon-list-alt" style="font-size: 20px;padding-left: 10px"></span></a><a title="Disable" href="" class="action-delete" data-id=' + row.PlaceID + '><span class="glyphicon glyphicon-trash" style="font-size: 20px;padding-left: 10px"></span></a></div>';
+                        }
+                        else
+                        {
+                            return '<div class="pull-right"><a href="/Places/Edit/' + row.PlaceID + '"><span class="glyphicon glyphicon-pencil" style="font-size: 20px;"></span></a><a href="/Places/Details/' + row.PlaceID + '"><span class="glyphicon glyphicon-list-alt" style="font-size: 20px;"></span></a></div>';
+                        }
+                    }
+                }]
+            });
+        });*@

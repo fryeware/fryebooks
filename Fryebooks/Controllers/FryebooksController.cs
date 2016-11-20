@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Fryebooks.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class FryebooksController : Controller
     {
         public ActionResult Index()

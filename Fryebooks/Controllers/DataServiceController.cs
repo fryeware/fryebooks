@@ -1,4 +1,6 @@
-﻿using Fryebooks.Models;
+﻿using DataTables.Mvc;
+using Fryebooks.Models;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,38 @@ namespace Fryebooks.Controllers
         {
             return View();
         }
+        //public ActionResult GetUsers([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
+        //{
+
+        //    List<UserViewModel> users = new List<UserViewModel>();
+        //    foreach (ApplicationUser user in UserManager.Users)
+        //    {
+        //        UserViewModel uvm = new UserViewModel();
+        //        uvm.UserName = user.UserName;
+        //        uvm.Email = user.Email;
+        //        uvm.HasAdminRole = UserManager.GetRoles(user.Id).Contains("Admin");
+        //        uvm.HasAdminRole = UserManager.GetRoles(user.Id).Contains("Download");
+        //        users.Add(uvm);
+        //    }
+        //    ViewBag.Users = users;
+
+        //    IEnumerable<PlacesViewModel> placesVM = applySearchFilter(unsortedPlaces, requestModel);
+        //    placesVM = applySortFilter(placesVM, requestModel);
+
+        //    // Populate dropdown data
+        //    ViewBag.CompanyID = new SelectList(GetValidParents(), "ID", "DisplayName");
+        //    var paged = placesVM.Skip(requestModel.Start).Take(requestModel.Length);
+        //    // i had client-side trouble processing datatablesResponse - the documentation is terrible, so we convert and send back the native datatables json structure.
+        //    DataTablesResponse rv = new DataTablesResponse(requestModel.Draw, paged, placesVM.Count(), placesVM.Count());
+        //    JsonResult jr = Json(new
+        //    {
+        //        sEcho = rv.draw,
+        //        iTotalRecords = rv.recordsTotal,
+        //        iTotalDisplayRecords = rv.recordsFiltered,
+        //        aaData = paged
+        //    }, JsonRequestBehavior.AllowGet);
+        //    return jr;
+        //}
 
         public ActionResult GetGData()
         {

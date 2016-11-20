@@ -26,6 +26,12 @@ namespace Fryebooks.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            context.Roles.AddOrUpdate(
+                r => r.Name,
+                new Microsoft.AspNet.Identity.EntityFramework.IdentityRole { Name = "Download" });
+            context.Roles.AddOrUpdate(
+                 r => r.Name,
+                new Microsoft.AspNet.Identity.EntityFramework.IdentityRole { Name = "Admin" });
         }
     }
 }

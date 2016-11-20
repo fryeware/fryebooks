@@ -9,14 +9,17 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Fryebooks.Models;
+using System.Collections.Generic;
+using System.Net;
 
 namespace Fryebooks.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -50,6 +53,62 @@ namespace Fryebooks.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        public ActionResult Users()
+        {
+            List<UserViewModel> users = new List<UserViewModel>();
+            foreach (ApplicationUser user in UserManager.Users)
+            {
+                UserViewModel uvm = new UserViewModel();
+                uvm.UserName = user.UserName;
+                uvm.Email = user.Email;
+                uvm.Id = user.Id;
+                users.Add(uvm);
+            }
+            foreach(UserViewModel uvm in users)
+            {
+                uvm.HasAdminRole = UserManager.GetRoles(uvm.Id).Contains("Admin");
+                uvm.HasDownloadRole = UserManager.GetRoles(uvm.Id).Contains("Download");
+            }
+            ViewBag.Users = users;
+            return View(users);
+        }
+
+        public ActionResult Edit(string id)
+        {
+            UserViewModel user = new UserViewModel();
+            user.HasAdminRole = UserManager.GetRoles(id).Contains("Admin");
+            user.HasDownloadRole = UserManager.GetRoles(id).Contains("Download");
+            user.UserName = (from u in db.Users where u.Id == id select u).FirstOrDefault().UserName;
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,UserNameName,HasAdminRole,HasDownloadRole")] UserViewModel uvm)
+        {
+            if (ModelState.IsValid)
+            {
+                if(uvm.HasAdminRole)
+                {
+                    UserManager.AddToRole(uvm.Id, "Admin");
+                }
+                if(!uvm.HasAdminRole)
+                {
+                    UserManager.RemoveFromRole(uvm.Id, "Admin");
+                }
+                if (uvm.HasDownloadRole)
+                {
+                    UserManager.AddToRole(uvm.Id, "Download");
+                }
+                if (!uvm.HasDownloadRole)
+                {
+                    UserManager.RemoveFromRole(uvm.Id, "Download");
+                }
+                return RedirectToAction("/Users");
+            }
+            return View(uvm);
         }
 
         //
