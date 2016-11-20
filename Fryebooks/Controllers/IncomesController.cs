@@ -10,7 +10,7 @@ using Fryebooks.Models;
 
 namespace Fryebooks.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class IncomesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
