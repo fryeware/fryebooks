@@ -18,38 +18,6 @@ namespace Fryebooks.Controllers
         {
             return View();
         }
-        //public ActionResult GetUsers([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
-        //{
-
-        //    List<UserViewModel> users = new List<UserViewModel>();
-        //    foreach (ApplicationUser user in UserManager.Users)
-        //    {
-        //        UserViewModel uvm = new UserViewModel();
-        //        uvm.UserName = user.UserName;
-        //        uvm.Email = user.Email;
-        //        uvm.HasAdminRole = UserManager.GetRoles(user.Id).Contains("Admin");
-        //        uvm.HasAdminRole = UserManager.GetRoles(user.Id).Contains("Download");
-        //        users.Add(uvm);
-        //    }
-        //    ViewBag.Users = users;
-
-        //    IEnumerable<PlacesViewModel> placesVM = applySearchFilter(unsortedPlaces, requestModel);
-        //    placesVM = applySortFilter(placesVM, requestModel);
-
-        //    // Populate dropdown data
-        //    ViewBag.CompanyID = new SelectList(GetValidParents(), "ID", "DisplayName");
-        //    var paged = placesVM.Skip(requestModel.Start).Take(requestModel.Length);
-        //    // i had client-side trouble processing datatablesResponse - the documentation is terrible, so we convert and send back the native datatables json structure.
-        //    DataTablesResponse rv = new DataTablesResponse(requestModel.Draw, paged, placesVM.Count(), placesVM.Count());
-        //    JsonResult jr = Json(new
-        //    {
-        //        sEcho = rv.draw,
-        //        iTotalRecords = rv.recordsTotal,
-        //        iTotalDisplayRecords = rv.recordsFiltered,
-        //        aaData = paged
-        //    }, JsonRequestBehavior.AllowGet);
-        //    return jr;
-        //}
 
         public ActionResult GetGData()
         {
@@ -64,7 +32,10 @@ namespace Fryebooks.Controllers
             Node n7 = new Node() { id = "n7", group = 2 };
             Node n8 = new Node() { id = "n8", group = 4 };
             Node n9 = new Node() { id = "n9", group = 3 };
-            gData.nodes = new List<Node>() { n1, n2, n3, n4, n5, n6, n7, n8, n9 };
+            Node n10 = new Node() { id = "n10", group = 2 };
+            Node n11 = new Node() { id = "n11", group = 4 };
+            Node n12 = new Node() { id = "n12", group = 3 };
+            gData.nodes = new List<Node>() { n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12 };
             Link l1 = new Link() { source = n1.id, target = n2.id, value = 15, distance=20 };
             Link l2 = new Link() { source = n1.id, target = n3.id, value = 10 };
             Link l3 = new Link() { source = n3.id, target = n4.id, value = 15 };
@@ -73,7 +44,10 @@ namespace Fryebooks.Controllers
             Link l6 = new Link() { source = n1.id, target = n7.id, value = 14 };
             Link l7 = new Link() { source = n1.id, target = n8.id, value = 14 };
             Link l8 = new Link() { source = n1.id, target = n9.id, value = 14 };
-            gData.links = new List<Link>() { l1, l2, l3, l4, l5, l6, l7, l8 };
+            Link l9 = new Link() { source = n9.id, target = n10.id, value = 14 };
+            Link l10 = new Link() { source = n9.id, target = n11.id, value = 14 };
+            Link l11 = new Link() { source = n9.id, target = n12.id, value = 14 };
+            gData.links = new List<Link>() { l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11 };
             return Json(gData, JsonRequestBehavior.AllowGet);
         }
 

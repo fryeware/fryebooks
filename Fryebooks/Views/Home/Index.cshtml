@@ -6,38 +6,68 @@
 
 @*<h2><img src="~/Images/logo3.png" style="height:40px;width:30px" />ryeware</h2>*@
 <link href="~/Content/Hompage.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
 <div>
-    <h1 class="col-lg-12">
+    <h1 class="col-lg-12" style="z-index:1">
         Welcome to Fryeware
     </h1>  <!-- title text  -->
-    <h3 class="col-lg-12">Connecting technology together</h3>
+    <h3 class="col-lg-12" style="z-index:1">Connecting technology together</h3>
 </div>
-@*<div class="row" style="height:200px">
-   
-</div>*@ <!-- title row  -->
-<svg id="graph" viewBox="-300 -200 1000 1000" preserveAspectRatio="none"></svg>
+<div class="row">
+    <svg id="graph" class="col-xs-12" viewBox="-300 -200 1000 500" style="z-index:-100" preserveAspectRatio="none"></svg>
+</div>
+
+<row class="row" style="height: 100px">
+    <div class="infoBox infoBox1 col-xs-12" id="infobox1">
+        <h4 class="list-group-item-heading infoBoxHead" id="infoBoxHeader">Software Development</h4>
+        <p class="list-group-item-text infoBoxBody" id="infoBoxBody">Desktop, mobile, and web.</p>
+    </div>
+
+    @*<div class="infoBox infoBox2 col-xs-12" id="infobox2">
+        <h4 class="list-group-item-heading" id="infoBoxHeader">Cyber Security</h4>
+        <p class="list-group-item-text">Assessment and advanced tooling.</p>
+    </div>
+
+    <div class="infoBox infoBox3 col-xs-12" id="infobox3">
+        <h4 class="list-group-item-heading" id="infoBoxHeader">Desktop and Server</h4>
+        <p class="list-group-item-text">Deployment, performance, and management.</p>
+    </div>
+
+    <div class="infoBox infoBox4 col-xs-12" id="infobox4">
+        <h4 class="list-group-item-heading" id="infoBoxHeader">Cloud Services</h4>
+        <p class="list-group-item-text">Architecture and design.</p>
+    </div>*@
+</row>
+<div class="row">
+
+</div>
+
 
 <style>
 .links line {
   stroke: #000;
   stroke-opacity: 0.6;
   stroke-width: 2px;
+    z-index:-1;
 }
 
-.link {
+.links {
     stroke: #000;
     stroke-width:2px;
+      z-index:-1;
 }
 
 .nodes circle {
   stroke: #fff;
   stroke-width: 1.5px;
+  z-index:-1;
 }
 
 .label {
     pointer-events: none;
     font: 12px sans-serif;
     text-transform: uppercase;
+      z-index:-1;
 }
 
 </style>
@@ -142,10 +172,51 @@
         //        .attr("y2", function (d) { return d.target.y; })
         //}
 
+        function mainLoop() {
+            innerLoop();
+            setInterval(function () {
+                innerLoop()
+            }, 15000);
+        }
 
-        //$(document).ready(function () {
-        //    $('#mainBody').css('background-image', "graph");
-        //});
+        function innerLoop() {
+            var infoBoxes = $(".infoBox");
+            var idx = -1;
+
+            function showInfoBoxes() {
+                idx++;
+                if (idx > 3) {
+                    return;
+                }
+                if (idx == 0)  {
+                    $("#infoBoxHeader").text("Software Development");
+                    $("#infoBoxBody").text("Desktop, mobile, and web.");
+                }
+                if (idx == 1) {
+                    $("#infoBoxHeader").text("Cyber Security");
+                    $("#infoBoxBody").text("Assessment and advanced tooling.");
+                }
+                if (idx == 2) {
+                    $("#infoBoxHeader").text("Desktop and Server");
+                    $("#infoBoxBody").text("Deployment and management.");
+                }
+                if (idx == 3) {
+                    $("#infoBoxHeader").text("Cloud Services");
+                    $("#infoBoxBody").text("Architecture and design.");
+                }
+                infoBoxes.eq(0)
+                .fadeTo(500, 1)
+                .delay(2000)
+                .fadeTo(500, 0, showInfoBoxes)
+            }
+            showInfoBoxes();
+        }
+
+
+        $(document).ready(function () {
+            $('#mainBody').css('background-image', "graph");
+            mainLoop();
+        });
 
         var svg = d3.select("svg"),
                     width = +svg.attr("width"),
@@ -154,7 +225,7 @@
         var color = d3.scaleOrdinal(d3.schemeCategory20);
 
         var simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id(function (d) { return d.id; }).distance(200))
+            .force("link", d3.forceLink().id(function (d) { return d.id; }).distance(300))
             .force("charge", d3.forceManyBody())
             .force("center", d3.forceCenter(width / 1.8, height / 1.5 ));
 

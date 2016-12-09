@@ -22,3 +22,33 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.infoBox {
+  z-index:1;
+  display: none;
+  position: relative;
+  /*left: 300px;
+  top: 700px;*/
+  /*left: 900px;
+  top: 200px;*/
+}
+
+/*.infoBox1{
+  left: 350px;
+  top: 600px;
+}
+
+.infoBox2{
+  left: 150px;
+  top: 200px;
+}
+
+.infoBox3{
+  left: 650px;
+  top: 400px;
+}
+
+.infoBox4{
+  left: 750px;
+  top: 200px;
+}*/

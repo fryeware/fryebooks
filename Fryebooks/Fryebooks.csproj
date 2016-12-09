@@ -209,6 +209,7 @@
     <Compile Include="Controllers\AdminLteController.cs" />
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DataServiceController.cs" />
     <Compile Include="Controllers\DownloadsController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
@@ -1216,6 +1217,7 @@
     <Content Include="Views\Account\Users.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Downloads\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
