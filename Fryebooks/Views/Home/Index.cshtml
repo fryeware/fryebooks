@@ -8,10 +8,10 @@
 <link href="~/Content/Hompage.css" rel="stylesheet" />
 <link href="~/Content/Site.css" rel="stylesheet" />
 <div>
-    <h1 class="col-lg-12" style="z-index:1">
+    <h1 class="col-lg-12 fryewareHeader" style="z-index:1">
         Welcome to Fryeware
     </h1>  <!-- title text  -->
-    <h3 class="col-lg-12" style="z-index:1">Connecting technology together</h3>
+    <h3 class="col-lg-12 fryewareHeader" style="z-index:1">     Connecting technology together</h3>
 </div>
 <div class="row">
     <svg id="graph" class="col-xs-12" viewBox="-300 -200 1000 500" style="z-index:-100" preserveAspectRatio="none"></svg>
@@ -23,7 +23,7 @@
         <p class="list-group-item-text infoBoxBody" id="infoBoxBody">Desktop, mobile, and web.</p>
     </div>
 
-    @*<div class="infoBox infoBox2 col-xs-12" id="infobox2">
+    <div class="infoBox infoBox2 col-xs-12" id="infobox2">
         <h4 class="list-group-item-heading" id="infoBoxHeader">Cyber Security</h4>
         <p class="list-group-item-text">Assessment and advanced tooling.</p>
     </div>
@@ -36,7 +36,7 @@
     <div class="infoBox infoBox4 col-xs-12" id="infobox4">
         <h4 class="list-group-item-heading" id="infoBoxHeader">Cloud Services</h4>
         <p class="list-group-item-text">Architecture and design.</p>
-    </div>*@
+    </div>
 </row>
 <div class="row">
 
@@ -77,141 +77,23 @@
 
 <div>
     <script>
-        //var height = 600;
-        //var width = 800;
-
-        //var nodes = [
-        //    { name: "cloud", xpos: "50", ypos: "10" },
-        //    { name: "desktop", xpos: "7", ypos: "10" },
-        //    { name: "mobile", xpos: "90", ypos: "10" },
-        //    { name: "network", xpos: "10", ypos: "50"  },
-        //    { name: "security", xpos: "10", ypos: "10" },
-        //    { name: "tools", xpos: "10", ypos: "20" },
-        //    { name: "web", xpos: "100", ypos: "2" }
-        //];
-
-        //var links = [
-        //    { source: 0, target: 1, distance: 200 },
-        //    { source: 1, target: 2, distance: 300 },
-        //    { source: 1, target: 3, distance: 400 },
-        //    { source: 1, target: 4, distance: 200 },
-        //    { source: 4, target: 5, distance: 300 },
-        //    { source: 5, target: 6, distance: 350 },
-        //    { source: 5, target: 4, distance: 350 },
-        //    { source: 4, target: 6, distance: 250 },
-        //    //{ source: 3, target: 5 },
-        //    //{ source: 3, target: 6 },
-        //    //{ source: 4, target: 5 },
-        //    //{ source: 4, target: 6 }
-        //];
-
-        //var svg = d3.select("#vis").append("svg")
-        //    .attr("width", width)
-        //    .attr("height", height)
-        //    .attr("pad-top", -50) ;
-
-        //var link = svg.selectAll(".link")
-        //    .data(links)
-        //    .enter().append("line")
-        //    .attr("class", "link");
-
-        ////var node = svg.selectAll(".node")
-        ////    .data(nodes)
-        ////    .enter().append("circle")
-        ////    .attr("class", "node")
-        ////    //.attr("cx", function (d) { return d.xpos })
-        ////    //.attr("cy", function (d) { return d.ypos })
-        ////    .attr("cx", function (d, i) { return (i+1)*(width/4) })
-        ////    .attr("cy", function (d, i) { return height/2 })
-        ////    .attr("r", width * 0.055);
-
-        //var node = svg.selectAll(".node")
-        //   .data(nodes)
-        //   .enter().append("g")
-        //    .attr("class", "node");
-
-        //node.append("image")
-        //    .attr("xlink:href", function (d) {
-        //        return "/Images/" + d.name + ".png";
-        //    })
-        //    .attr("x", function (d) { return -30; })
-        //    .attr("y", function (d) { return -30; })
-        //    .attr("height", 60)
-        //    .attr("width", 60);
-            
-        //node.append("text")
-        //    .attr("text-anchor", "middle")
-        //    .attr("dy", ".35em")
-        //    .attr("y", -42)
-        //    .attr("class", "label")
-        //    .text(function (d) { return d.name; });
-
-        //var force = d3.layout.force()
-        //    .size([width, height])
-        //    .nodes(nodes)
-        //    .links(links)
-        //    .on("tick", tick)
-        //    .linkDistance(function (d) { return d.distance; })
-        //    .gravity(.05)
-        //    .charge(-250)
-        //    .start();
-
-        //function tick() {
-        //    //node.attr("cx", function (d) { return d.x; })
-        //    //    .attr("cy", function (d) { return d.y; })
-        //    //    .call(force.drag);
-
-        //    node.attr("transform", function (d) {
-        //        return "translate(" + d.x + "," + d.y + ")";
-        //    })
-        //    .call(force.drag);
-
-        //    link.attr("x1", function (d) { return d.source.x; })
-        //        .attr("y1", function (d) { return d.source.y; })
-        //        .attr("x2", function (d) { return d.target.x; })
-        //        .attr("y2", function (d) { return d.target.y; })
-        //}
 
         function mainLoop() {
-            innerLoop();
-            setInterval(function () {
-                innerLoop()
-            }, 15000);
-        }
-
-        function innerLoop() {
             var infoBoxes = $(".infoBox");
             var idx = -1;
 
             function showInfoBoxes() {
                 idx++;
                 if (idx > 3) {
-                    return;
+                    idx = 0;
                 }
-                if (idx == 0)  {
-                    $("#infoBoxHeader").text("Software Development");
-                    $("#infoBoxBody").text("Desktop, mobile, and web.");
-                }
-                if (idx == 1) {
-                    $("#infoBoxHeader").text("Cyber Security");
-                    $("#infoBoxBody").text("Assessment and advanced tooling.");
-                }
-                if (idx == 2) {
-                    $("#infoBoxHeader").text("Desktop and Server");
-                    $("#infoBoxBody").text("Deployment and management.");
-                }
-                if (idx == 3) {
-                    $("#infoBoxHeader").text("Cloud Services");
-                    $("#infoBoxBody").text("Architecture and design.");
-                }
-                infoBoxes.eq(0)
-                .fadeTo(500, 1)
-                .delay(2000)
-                .fadeTo(500, 0, showInfoBoxes)
+                infoBoxes.eq(idx)
+                  .fadeIn(500)
+                  .delay(2000)
+                  .fadeOut(500, showInfoBoxes);
             }
             showInfoBoxes();
         }
-
 
         $(document).ready(function () {
             $('#mainBody').css('background-image', "graph");
