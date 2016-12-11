@@ -47,6 +47,13 @@ namespace Fryebooks
             // This is similar to the RememberMe option when you log in.
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
+            // magic incantation to force ssl on oauth redirect when terminating ssl on an ELB: http://stackoverflow.com/questions/34158495/change-facebook-redirect-uri-web-api/34191701?noredirect=1#comment56199670_34191701
+            app.Use((context, next) =>
+            {
+                context.Request.Scheme = "https";
+                return next();
+            });
+
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",

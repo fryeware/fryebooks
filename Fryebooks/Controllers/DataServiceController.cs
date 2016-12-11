@@ -18,7 +18,7 @@ namespace Fryebooks.Controllers
         {
             return View();
         }
-
+        [AllowAnonymous]
         public ActionResult GetGData()
         {
             // g1 = os, g2=dev, g3=DB, g4=AD, g5=

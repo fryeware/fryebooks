@@ -30,3 +30,28 @@
     background-image: url('/../Images/back1.jpg')
 }
 
+.links line {
+  stroke: ghostwhite;
+  stroke-opacity: 0.6;
+  stroke-width: 2px;
+    z-index:-1;
+}
+
+.links {
+    stroke: #000;
+    stroke-width:2px;
+      z-index:-1;
+}
+
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+  z-index:-1;
+}
+
+/*.label {
+    pointer-events: none;
+    font: 12px sans-serif;
+    text-transform: uppercase;
+      z-index:-1;
+}*/
