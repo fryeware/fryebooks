@@ -3,22 +3,15 @@
     ViewBag.Title = "Fryeware";
 }
 
-
-@*<h2><img src="~/Images/logo3.png" style="height:40px;width:30px" />ryeware</h2>*@
 <link href="~/Content/Hompage.css" rel="stylesheet" />
 <link href="~/Content/Site.css" rel="stylesheet" />
 <div>
     <h1 class="col-lg-12 fryewareHeader" >
         Welcome to Fryeware
-    </h1>  <!-- title text  -->
-    <h3 class="col-lg-12 fryewareHeader">     Connecting technology together</h3>
+    </h1>
+    <h3 class="col-lg-12 fryewareHeader">Connecting technology together</h3>
 </div>
-
-@*<svg id="graph" class="col-xs-12" viewBox="-300 -200 1000 500" preserveAspectRatio="none"></svg>*@
-@*<svg id="graph" class="fryewareGraph" height="1000" width="500" viewBox="-300 -200 1000 500"></svg>*@
-@*<div id="graph" class="col-xs-12"></div>*@
 <div id="mainCanvas" class="spacer col-xs-12"></div>
-
 <row class="row col-xs-12  text-center spacer">
     <div class="infoBox infoBox1 col-xs-12" id="infobox1">
         <h4 class="list-group-item-heading infoBoxHead" id="infoBoxHeader">Software Development</h4>
@@ -40,21 +33,16 @@
         <p class="list-group-item-text">Architecture and design</p>
     </div>
 </row>
-<div class="row">
-
+    <div class="row">
 </div>
 
 
 <style>
 
 </style>
-@*<script src='http://d3js.org/d3.v3.min.js'></script>*@
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-@*<script src="https://d3js.org/d3.v4.min.js"></script>*@
-
 <div>
-
     <script>
         particlesJS("mainCanvas", {
             "particles": {
@@ -188,182 +176,8 @@
         }
 
         $(document).ready(function () {
-            //$('#mainBody').css('background-image', "graph");
             mainLoop();
         });
-
-        //var svg = d3.select("svgx"),
-        //            width = +svg.attr("width"),
-        //            height = +svg.attr("height");
-
-        //var color = d3.scaleOrdinal(d3.schemeCategory20);
-
-        //var simulation = d3.forceSimulation()
-        //    .force("link", d3.forceLink().id(function (d) { return d.id; }).distance(300))
-        //    .force("charge", d3.forceManyBody())
-        //    .force("center", d3.forceCenter(width / 1.8, height / 1.5 ));
-
-        //d3.json("/DataService/GetGData", function (error, graph) {
-        //    if (error) throw error;
-
-        //    var link = svg.append("g")
-        //        .attr("class", "links")
-        //      .selectAll("line")
-        //      .data(graph.links)
-        //      .enter().append("line")
-        //        .attr("stroke-width", function (d) { return Math.sqrt(d.value); });      
-
-        //    var node = svg.append("g")
-        //        .attr("class", "nodes")
-        //      .selectAll("circle")
-        //      .data(graph.nodes)
-        //      .enter().append("circle")
-        //        .attr("r", 25)
-        //        .attr("fill", function (d) { return color(d.group); })
-        //        .call(d3.drag()
-        //            .on("start", dragstarted)
-        //            .on("drag", dragged)
-        //            .on("end", dragended));
-
-        //    node.append("title")
-        //        .text(function (d) { return d.id; });
-
-        //    simulation
-        //        .nodes(graph.nodes)
-        //        .on("tick", ticked);
-
-        //    simulation.force("link")
-        //        .links(graph.links);
-
-        //    function ticked() {
-        //        link
-        //            .attr("x1", function (d) { return d.source.x; })
-        //            .attr("y1", function (d) { return d.source.y; })
-        //            .attr("x2", function (d) { return d.target.x; })
-        //            .attr("y2", function (d) { return d.target.y; });
-
-        //        node
-        //            .attr("cx", function (d) { return d.x; })
-        //            .attr("cy", function (d) { return d.y; });
-        //    }
-        //});
-
-        //function dragstarted(d) {
-        //    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-        //    d.fx = d.x;
-        //    d.fy = d.y;
-        //}
-
-        //function dragged(d) {
-        //    d.fx = d3.event.x;
-        //    d.fy = d3.event.y;
-        //}
-
-        //function dragended(d) {
-        //    if (!d3.event.active) simulation.alphaTarget(0);
-        //    d.fx = null;
-        //    d.fy = null;
-        //}
-
-        //simulation.alphaTarget(0.3).restart();
-        //simulation.alphaTarget(0.3).restart();
-        //simulation.alphaTarget(0.3).restart();
-
-        //var height = 800;
-        //var width = 1000;
-
-        //var nodes = [
-        //    { name: "cloud", xpos: "-50", ypos: "-10" },
-        //    { name: "desktop", xpos: "7", ypos: "0" },
-        //    { name: "mobile", xpos: "2", ypos: "0" },
-        //    { name: "network", xpos: "10", ypos: "-40" },
-        //    { name: "security", xpos: "10", ypos: "0" },
-        //    { name: "tools", xpos: "10", ypos: "20" },
-        //    { name: "web", xpos: "1", ypos: "30" }
-        //];
-
-        //var links = [
-        //    { source: 0, target: 1, distance: 200 },
-        //    { source: 1, target: 2, distance: 300 },
-        //    { source: 1, target: 3, distance: 400 },
-        //    { source: 1, target: 4, distance: 200 },
-        //    { source: 4, target: 5, distance: 300 },
-        //    { source: 5, target: 6, distance: 350 },
-        //    { source: 5, target: 4, distance: 350 },
-        //    { source: 4, target: 6, distance: 250 },
-        //    //{ source: 3, target: 5 },
-        //    //{ source: 3, target: 6 },
-        //    //{ source: 4, target: 5 },
-        //    //{ source: 4, target: 6 }
-        //];
-
-        //var svg = d3.select("#graph").append("svg")
-        //    .attr("width", width)
-        //    .attr("height", height)
-        //    .attr("pad-top", 0);
-
-        //var link = svg.selectAll(".link")
-        //    .data(links)
-        //    .enter().append("line")
-        //    .attr("class", "link");
-
-        ////var node = svg.selectAll(".node")
-        ////    .data(nodes)
-        ////    .enter().append("circle")
-        ////    .attr("class", "node")
-        ////    //.attr("cx", function (d) { return d.xpos })
-        ////    //.attr("cy", function (d) { return d.ypos })
-        ////    .attr("cx", function (d, i) { return (i+1)*(width/4) })
-        ////    .attr("cy", function (d, i) { return height/2 })
-        ////    .attr("r", width * 0.055);
-
-        //var node = svg.selectAll(".node")
-        //   .data(nodes)
-        //   .enter().append("g")
-        //    .attr("class", "node");
-
-        //node.append("image")
-        //    .attr("xlink:href", function (d) {
-        //        return "/Images/" + d.name + ".png";
-        //    })
-        //    .attr("x", function (d) { return -30; })
-        //    .attr("y", function (d) { return -30; })
-        //    .attr("height", 60)
-        //    .attr("width", 60);
-
-        //node.append("text")
-        //    .attr("text-anchor", "middle")
-        //    .attr("dy", ".35em")
-        //    .attr("y", -42)
-        //    .attr("class", "label")
-        //    .text(function (d) { return d.name; });
-
-        //var force = d3.layout.force()
-        //    .size([width, height])
-        //    .nodes(nodes)
-        //    .links(links)
-        //    .on("tick", tick)
-        //    .linkDistance(function (d) { return d.distance; })
-        //    .gravity(.05)
-        //    .charge(-250)
-        //    .start();
-
-        //function tick() {
-        //    //node.attr("cx", function (d) { return d.x; })
-        //    //    .attr("cy", function (d) { return d.y; })
-        //    //    .call(force.drag);
-
-        //    node.attr("transform", function (d) {
-        //        return "translate(" + d.x + "," + d.y + ")";
-        //    })
-        //    .call(force.drag);
-
-        //    link.attr("x1", function (d) { return d.source.x; })
-        //        .attr("y1", function (d) { return d.source.y; })
-        //        .attr("x2", function (d) { return d.target.x; })
-        //        .attr("y2", function (d) { return d.target.y; })
-        //}
-
     </script>
 
     <script>

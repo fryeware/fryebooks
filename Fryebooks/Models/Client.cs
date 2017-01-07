@@ -11,7 +11,8 @@ namespace Fryebooks.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Client
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -29,6 +30,7 @@ namespace Fryebooks.Models
         public string Phone { get; set; }
         public string Url { get; set; }
         public string Email { get; set; }
+        [DataType(DataType.Date)]
         public System.DateTime OnBoardDate { get; set; }
         public string ImageUrl { get; set; }
         public string Location { get; set; }

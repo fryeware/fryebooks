@@ -11,7 +11,8 @@ namespace Fryebooks.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class WorkRequest
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +22,9 @@ namespace Fryebooks.Models
         }
     
         public int Id { get; set; }
+        [DataType(DataType.Date)]
         public System.DateTime RequestDate { get; set; }
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> CompletionDate { get; set; }
         public string Description { get; set; }
         public int ClientId { get; set; }

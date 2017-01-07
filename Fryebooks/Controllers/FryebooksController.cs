@@ -201,6 +201,7 @@ namespace Fryebooks.Controllers
         {
             ApplicationDbContext db = new ApplicationDbContext();
             IQueryable<WorkRequest> allWorkRequests = from w in db.WorkRequests
+                                                      where w.CompletionDate != null
                                                       select w;
             double allEstimates = 0;
             TimeSpan allWork = new TimeSpan();

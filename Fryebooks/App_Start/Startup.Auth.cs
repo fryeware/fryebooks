@@ -48,6 +48,7 @@ namespace Fryebooks
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             // magic incantation to force ssl on oauth redirect when terminating ssl on an ELB: http://stackoverflow.com/questions/34158495/change-facebook-redirect-uri-web-api/34191701?noredirect=1#comment56199670_34191701
+            // to bypass ssl for local development, comment scheme setting
             app.Use((context, next) =>
             {
                 context.Request.Scheme = "https";
