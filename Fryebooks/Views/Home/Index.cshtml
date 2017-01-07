@@ -13,30 +13,31 @@
     </h1>  <!-- title text  -->
     <h3 class="col-lg-12 fryewareHeader">     Connecting technology together</h3>
 </div>
-<svg id="graph" class="col-xs-12" viewBox="-300 -200 1000 500" preserveAspectRatio="none"></svg>
-<div class="row">
-    
-</div>
 
-<row class="row" style="height: 100px">
+@*<svg id="graph" class="col-xs-12" viewBox="-300 -200 1000 500" preserveAspectRatio="none"></svg>*@
+@*<svg id="graph" class="fryewareGraph" height="1000" width="500" viewBox="-300 -200 1000 500"></svg>*@
+@*<div id="graph" class="col-xs-12"></div>*@
+<div id="mainCanvas" class="spacer col-xs-12"></div>
+
+<row class="row col-xs-12  text-center spacer">
     <div class="infoBox infoBox1 col-xs-12" id="infobox1">
         <h4 class="list-group-item-heading infoBoxHead" id="infoBoxHeader">Software Development</h4>
-        <p class="list-group-item-text infoBoxBody" id="infoBoxBody">Desktop, mobile, and web.</p>
+        <p class="list-group-item-text infoBoxBody" id="infoBoxBody">Desktop, mobile, and web</p>
     </div>
 
     <div class="infoBox infoBox2 col-xs-12" id="infobox2">
-        <h4 class="list-group-item-heading" id="infoBoxHeader">Cyber Security</h4>
-        <p class="list-group-item-text">Assessment and advanced tooling.</p>
+        <h4 class="list-group-item-heading infoBoxHead" id="infoBoxHeader">Cyber Security</h4>
+        <p class="list-group-item-text">Assessment and advanced tooling</p>
     </div>
 
     <div class="infoBox infoBox3 col-xs-12" id="infobox3">
-        <h4 class="list-group-item-heading" id="infoBoxHeader">Desktop and Server</h4>
-        <p class="list-group-item-text">Deployment and management.</p>
+        <h4 class="list-group-item-heading infoBoxHead" id="infoBoxHeader">Desktop and Server</h4>
+        <p class="list-group-item-text">Deployment and management</p>
     </div>
 
     <div class="infoBox infoBox4 col-xs-12" id="infobox4">
-        <h4 class="list-group-item-heading" id="infoBoxHeader">Cloud Services</h4>
-        <p class="list-group-item-text">Architecture and design.</p>
+        <h4 class="list-group-item-heading infoBoxHead" id="infoBoxHeader">Cloud Services</h4>
+        <p class="list-group-item-text">Architecture and design</p>
     </div>
 </row>
 <div class="row">
@@ -48,12 +49,127 @@
 
 </style>
 @*<script src='http://d3js.org/d3.v3.min.js'></script>*@
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
+@*<script src="https://d3js.org/d3.v4.min.js"></script>*@
 
 <div>
-    <script>
 
+    <script>
+        particlesJS("mainCanvas", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 5.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 10,
+                        "opacity_min": 0.1,
+                        "sync": true
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 5,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": true,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 60,
+                        "duration": .8
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+    </script>
+
+    <script>
         function mainLoop() {
             var infoBoxes = $(".infoBox");
             var idx = -1;
@@ -76,84 +192,191 @@
             mainLoop();
         });
 
-        var svg = d3.select("svg"),
-                    width = +svg.attr("width"),
-                    height = +svg.attr("height");
+        //var svg = d3.select("svgx"),
+        //            width = +svg.attr("width"),
+        //            height = +svg.attr("height");
 
-        var color = d3.scaleOrdinal(d3.schemeCategory20);
+        //var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-        var simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id(function (d) { return d.id; }).distance(300))
-            .force("charge", d3.forceManyBody())
-            .force("center", d3.forceCenter(width / 1.8, height / 1.5 ));
+        //var simulation = d3.forceSimulation()
+        //    .force("link", d3.forceLink().id(function (d) { return d.id; }).distance(300))
+        //    .force("charge", d3.forceManyBody())
+        //    .force("center", d3.forceCenter(width / 1.8, height / 1.5 ));
 
-        d3.json("/DataService/GetGData", function (error, graph) {
-            if (error) throw error;
+        //d3.json("/DataService/GetGData", function (error, graph) {
+        //    if (error) throw error;
 
-            var link = svg.append("g")
-                .attr("class", "links")
-              .selectAll("line")
-              .data(graph.links)
-              .enter().append("line")
-                .attr("stroke-width", function (d) { return Math.sqrt(d.value); });      
+        //    var link = svg.append("g")
+        //        .attr("class", "links")
+        //      .selectAll("line")
+        //      .data(graph.links)
+        //      .enter().append("line")
+        //        .attr("stroke-width", function (d) { return Math.sqrt(d.value); });      
 
-            var node = svg.append("g")
-                .attr("class", "nodes")
-              .selectAll("circle")
-              .data(graph.nodes)
-              .enter().append("circle")
-                .attr("r", 25)
-                .attr("fill", function (d) { return color(d.group); })
-                .call(d3.drag()
-                    .on("start", dragstarted)
-                    .on("drag", dragged)
-                    .on("end", dragended));
+        //    var node = svg.append("g")
+        //        .attr("class", "nodes")
+        //      .selectAll("circle")
+        //      .data(graph.nodes)
+        //      .enter().append("circle")
+        //        .attr("r", 25)
+        //        .attr("fill", function (d) { return color(d.group); })
+        //        .call(d3.drag()
+        //            .on("start", dragstarted)
+        //            .on("drag", dragged)
+        //            .on("end", dragended));
 
-            node.append("title")
-                .text(function (d) { return d.id; });
+        //    node.append("title")
+        //        .text(function (d) { return d.id; });
 
-            simulation
-                .nodes(graph.nodes)
-                .on("tick", ticked);
+        //    simulation
+        //        .nodes(graph.nodes)
+        //        .on("tick", ticked);
 
-            simulation.force("link")
-                .links(graph.links);
+        //    simulation.force("link")
+        //        .links(graph.links);
 
-            function ticked() {
-                link
-                    .attr("x1", function (d) { return d.source.x; })
-                    .attr("y1", function (d) { return d.source.y; })
-                    .attr("x2", function (d) { return d.target.x; })
-                    .attr("y2", function (d) { return d.target.y; });
+        //    function ticked() {
+        //        link
+        //            .attr("x1", function (d) { return d.source.x; })
+        //            .attr("y1", function (d) { return d.source.y; })
+        //            .attr("x2", function (d) { return d.target.x; })
+        //            .attr("y2", function (d) { return d.target.y; });
 
-                node
-                    .attr("cx", function (d) { return d.x; })
-                    .attr("cy", function (d) { return d.y; });
-            }
-        });
+        //        node
+        //            .attr("cx", function (d) { return d.x; })
+        //            .attr("cy", function (d) { return d.y; });
+        //    }
+        //});
 
-        function dragstarted(d) {
-            if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-            d.fx = d.x;
-            d.fy = d.y;
-        }
+        //function dragstarted(d) {
+        //    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+        //    d.fx = d.x;
+        //    d.fy = d.y;
+        //}
 
-        function dragged(d) {
-            d.fx = d3.event.x;
-            d.fy = d3.event.y;
-        }
+        //function dragged(d) {
+        //    d.fx = d3.event.x;
+        //    d.fy = d3.event.y;
+        //}
 
-        function dragended(d) {
-            if (!d3.event.active) simulation.alphaTarget(0);
-            d.fx = null;
-            d.fy = null;
-        }
+        //function dragended(d) {
+        //    if (!d3.event.active) simulation.alphaTarget(0);
+        //    d.fx = null;
+        //    d.fy = null;
+        //}
 
-        simulation.alphaTarget(0.3).restart();
-        simulation.alphaTarget(0.3).restart();
-        simulation.alphaTarget(0.3).restart();
+        //simulation.alphaTarget(0.3).restart();
+        //simulation.alphaTarget(0.3).restart();
+        //simulation.alphaTarget(0.3).restart();
+
+        //var height = 800;
+        //var width = 1000;
+
+        //var nodes = [
+        //    { name: "cloud", xpos: "-50", ypos: "-10" },
+        //    { name: "desktop", xpos: "7", ypos: "0" },
+        //    { name: "mobile", xpos: "2", ypos: "0" },
+        //    { name: "network", xpos: "10", ypos: "-40" },
+        //    { name: "security", xpos: "10", ypos: "0" },
+        //    { name: "tools", xpos: "10", ypos: "20" },
+        //    { name: "web", xpos: "1", ypos: "30" }
+        //];
+
+        //var links = [
+        //    { source: 0, target: 1, distance: 200 },
+        //    { source: 1, target: 2, distance: 300 },
+        //    { source: 1, target: 3, distance: 400 },
+        //    { source: 1, target: 4, distance: 200 },
+        //    { source: 4, target: 5, distance: 300 },
+        //    { source: 5, target: 6, distance: 350 },
+        //    { source: 5, target: 4, distance: 350 },
+        //    { source: 4, target: 6, distance: 250 },
+        //    //{ source: 3, target: 5 },
+        //    //{ source: 3, target: 6 },
+        //    //{ source: 4, target: 5 },
+        //    //{ source: 4, target: 6 }
+        //];
+
+        //var svg = d3.select("#graph").append("svg")
+        //    .attr("width", width)
+        //    .attr("height", height)
+        //    .attr("pad-top", 0);
+
+        //var link = svg.selectAll(".link")
+        //    .data(links)
+        //    .enter().append("line")
+        //    .attr("class", "link");
+
+        ////var node = svg.selectAll(".node")
+        ////    .data(nodes)
+        ////    .enter().append("circle")
+        ////    .attr("class", "node")
+        ////    //.attr("cx", function (d) { return d.xpos })
+        ////    //.attr("cy", function (d) { return d.ypos })
+        ////    .attr("cx", function (d, i) { return (i+1)*(width/4) })
+        ////    .attr("cy", function (d, i) { return height/2 })
+        ////    .attr("r", width * 0.055);
+
+        //var node = svg.selectAll(".node")
+        //   .data(nodes)
+        //   .enter().append("g")
+        //    .attr("class", "node");
+
+        //node.append("image")
+        //    .attr("xlink:href", function (d) {
+        //        return "/Images/" + d.name + ".png";
+        //    })
+        //    .attr("x", function (d) { return -30; })
+        //    .attr("y", function (d) { return -30; })
+        //    .attr("height", 60)
+        //    .attr("width", 60);
+
+        //node.append("text")
+        //    .attr("text-anchor", "middle")
+        //    .attr("dy", ".35em")
+        //    .attr("y", -42)
+        //    .attr("class", "label")
+        //    .text(function (d) { return d.name; });
+
+        //var force = d3.layout.force()
+        //    .size([width, height])
+        //    .nodes(nodes)
+        //    .links(links)
+        //    .on("tick", tick)
+        //    .linkDistance(function (d) { return d.distance; })
+        //    .gravity(.05)
+        //    .charge(-250)
+        //    .start();
+
+        //function tick() {
+        //    //node.attr("cx", function (d) { return d.x; })
+        //    //    .attr("cy", function (d) { return d.y; })
+        //    //    .call(force.drag);
+
+        //    node.attr("transform", function (d) {
+        //        return "translate(" + d.x + "," + d.y + ")";
+        //    })
+        //    .call(force.drag);
+
+        //    link.attr("x1", function (d) { return d.source.x; })
+        //        .attr("y1", function (d) { return d.source.y; })
+        //        .attr("x2", function (d) { return d.target.x; })
+        //        .attr("y2", function (d) { return d.target.y; })
+        //}
 
     </script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-88829024-1', 'auto');
+  ga('send', 'pageview');
+
+    </script>
+
 </div>
 
 
