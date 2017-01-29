@@ -525,6 +525,7 @@
       <DependentUpon>FryebooksModel.edmx</DependentUpon>
       <LastGenOutput>FryebooksModel.cs</LastGenOutput>
     </Content>
+    <Content Include="NotesToSelf.txt" />
     <Content Include="Scripts\AdminLTE\app.js" />
     <Content Include="Scripts\AdminLTE\app.min.js" />
     <Content Include="Scripts\AdminLTE\demo.js" />

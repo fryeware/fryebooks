@@ -211,6 +211,7 @@ namespace Fryebooks.Controllers
             }
 
             IQueryable<WorkResponse> allWorkResponses = from r in db.WorkResponses
+                                                        where r.WorkRequest.CompletionDate != null
                                                         select r;
             foreach (WorkResponse wRes in allWorkResponses)
             {

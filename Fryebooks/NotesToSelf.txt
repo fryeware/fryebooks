@@ -1,0 +1,8 @@
+﻿TO ENABLE LOCAL DEVELOPMENT OF THIS SITE, YOU NEED TO MAKE THE FOLLOWING CHANGES:
+
+1.)  Uncomment all sections denoted with the LOCALDEV heading.  At time of this writing there are 2:
+		FilterConfig
+		Startup.Auth
+2.)  Disable custom errors in web.config
+3.)  Set compile type to debug
+

@@ -11,10 +11,13 @@ namespace Fryebooks.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class WorkRespons
     {
         public int Id { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime TimeStarted { get; set; }
         public System.TimeSpan TimeWorked { get; set; }
         public string Description { get; set; }

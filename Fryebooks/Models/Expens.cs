@@ -11,11 +11,14 @@ namespace Fryebooks.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Expens
     {
         public int Id { get; set; }
         public string Description { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime ExpenseDate { get; set; }
         public double ExpenseAmount { get; set; }
         public bool Refundable { get; set; }

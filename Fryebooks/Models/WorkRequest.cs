@@ -23,8 +23,10 @@ namespace Fryebooks.Models
     
         public int Id { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime RequestDate { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> CompletionDate { get; set; }
         public string Description { get; set; }
         public int ClientId { get; set; }

@@ -8,8 +8,10 @@ namespace Fryebooks
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            // LOCALDEV
             // for local development, comment authorize all attrib
             filters.Add(new System.Web.Mvc.AuthorizeAttribute());
+            // END LOCALDEV
         }
     }
 }

@@ -31,6 +31,7 @@ namespace Fryebooks.Models
         public string Url { get; set; }
         public string Email { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime OnBoardDate { get; set; }
         public string ImageUrl { get; set; }
         public string Location { get; set; }

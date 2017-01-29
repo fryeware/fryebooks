@@ -18,6 +18,7 @@ namespace Fryebooks.Models
         public int Id { get; set; }
         public string Description { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DueDate { get; set; }
         public bool Enabled { get; set; }
         public Nullable<int> ClientId { get; set; }
