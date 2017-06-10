@@ -21,6 +21,8 @@ $.ajax({
     url: '/DataService/GetChartData',
     dataType: 'json',
     success: function (data) {
+        console.log('data:');
+        console.log(data);
         salesChartData = data;
     },
     async: false

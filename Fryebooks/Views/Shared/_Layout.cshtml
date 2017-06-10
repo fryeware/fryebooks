@@ -10,7 +10,8 @@
     @*Bundle CSS, assuming includes Bootstrap CSS *@
     @Styles.Render("~/Content/css")
     <!-- Font Awesome Icons -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    @*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />*@
+    <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- Morris chart -->
@@ -22,6 +23,7 @@
     <!-- Theme style -->
     <link href="~/Content/AdminLTE/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/AdminLTE/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body id="mainBody" class="fryewareBody">
@@ -85,8 +87,7 @@
 
     <!-- daterangepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-
-
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

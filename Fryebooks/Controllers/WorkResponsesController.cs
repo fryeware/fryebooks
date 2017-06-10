@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Fryebooks.Models;
+using DataTables.Mvc;
 
 namespace Fryebooks.Controllers
 {
@@ -14,6 +15,117 @@ namespace Fryebooks.Controllers
     public class WorkResponsesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+
+        public ActionResult GetWorkItems([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
+        {
+            IEnumerable<WorkViewModel> unsortedItems = (from u in db.WorkResponses
+                                                        select new WorkViewModel
+                                                        {
+                                                            Id = u.Id,
+                                                            TimeStarted = u.TimeStarted.ToString(),
+                                                            TimeWorked = u.TimeWorked.ToString(),
+                                                            Client = u.WorkRequest.Client.Name,
+                                                            Description = u.Description,
+                                                            Billable = u.Billable
+                                                        });
+
+            IEnumerable<WorkViewModel> vm = applySearchFilter(unsortedItems, requestModel);
+            vm = applySortFilter(vm, requestModel);
+            var paged = vm.Skip(requestModel.Start).Take(requestModel.Length);
+            DataTablesResponse rv = new DataTablesResponse(requestModel.Draw, paged, vm.Count(), vm.Count());
+            JsonResult jr = Json(new
+            {
+                sEcho = rv.draw,
+                iTotalRecords = rv.recordsTotal,
+                iTotalDisplayRecords = rv.recordsFiltered,
+                aaData = paged
+            }, JsonRequestBehavior.AllowGet);
+            return jr;
+        }
+
+        /// <summary>
+        /// returns a view model with elements that match the search term.
+        ///   TODO:   Implement regex?
+        /// </summary>
+        /// <param name="unfilteredPlaces"></param>
+        /// <param name="requestModel"></param>
+        /// <returns></returns>
+        private IEnumerable<WorkViewModel> applySearchFilter(IEnumerable<WorkViewModel> unfilteredVM, IDataTablesRequest requestModel)
+        {
+            string searchTerm = requestModel.Search.Value.ToLower();
+            IEnumerable<WorkViewModel> filteredVM = unfilteredVM;
+            if (searchTerm != "")
+            {
+                filteredVM = from p in unfilteredVM
+                             where p.Client != null && p.Client.ToString().ToLower().Contains(searchTerm) ||
+                             p.TimeStarted != null && p.TimeStarted.ToString().ToLower().Contains(searchTerm) ||
+                             p.TimeWorked != null && p.TimeWorked.ToLower().Contains(searchTerm) ||
+                             p.Description != null && p.Description.ToLower().Contains(searchTerm) ||
+                             p.Billable.ToString() == searchTerm
+                             select p;
+            }
+
+            return filteredVM;
+        }
+
+        /// <summary>
+        /// Sorts result set by selected column and order.
+        /// </summary>
+        /// <param name="unsortedPlaces"></param>
+        /// <param name="requestModel"></param>
+        /// <returns></returns>
+        private IEnumerable<WorkViewModel> applySortFilter(IEnumerable<WorkViewModel> unsortedVM, IDataTablesRequest requestModel)
+        {
+            IEnumerable<WorkViewModel> sortedItems = from p in unsortedVM
+                                                               orderby p.TimeStarted
+                                                               select p;
+            Column sortingColumn = (from col in requestModel.Columns
+                                    where col.IsOrdered == true
+                                    select col).First();
+            switch (sortingColumn.Name)
+            {
+                case "TimeStarted":
+                    sortedItems = sortedItems.OrderBy(s => s.TimeStarted);
+                    if (sortingColumn.SortDirection == Column.OrderDirection.Descendant)
+                    {
+                        sortedItems = sortedItems.OrderByDescending(s => s.TimeStarted);
+                    }
+                    break;
+                case "TimeWorked":
+                    sortedItems = sortedItems.OrderBy(s => s.TimeWorked);
+                    if (sortingColumn.SortDirection == Column.OrderDirection.Descendant)
+                    {
+                        sortedItems = sortedItems.OrderByDescending(s => s.TimeWorked);
+                    }
+                    break;
+                case "Description":
+                    sortedItems = sortedItems.OrderBy(s => s.Description);
+                    if (sortingColumn.SortDirection == Column.OrderDirection.Descendant)
+                    {
+                        sortedItems = sortedItems.OrderByDescending(s => s.Description);
+                    }
+                    break;
+                case "Client":
+                    sortedItems = sortedItems.OrderBy(s => s.Client);
+                    if (sortingColumn.SortDirection == Column.OrderDirection.Descendant)
+                    {
+                        sortedItems = sortedItems.OrderByDescending(s => s.Client);
+                    }
+                    break;
+                case "Billable":
+                    sortedItems = sortedItems.OrderBy(s => s.Billable);
+                    if (sortingColumn.SortDirection == Column.OrderDirection.Descendant)
+                    {
+                        sortedItems = sortedItems.OrderByDescending(s => s.Billable);
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return sortedItems;
+        }
+
 
         // GET: WorkResponses
         public ActionResult Index()

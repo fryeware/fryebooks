@@ -108,39 +108,63 @@ namespace Fryebooks.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             ChartObject chart = new ChartObject();
             chart.datasets = new List<ChartDataset>();
-            chart.labels = new List<string>() { "October", "November", "December", "January", "February", "March" };
-            IQueryable<Income> allIncome = from i in db.Incomes
+            chart.labels = new List<string>() { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" };
+            IQueryable<Income> allIncome = from i in db.Incomes where i.PayDay.Year == 2017 
                                            select i;
-            IQueryable<Expense> allExpense = from e in db.Expenses
+            IQueryable<Expense> allExpense = from e in db.Expenses where e.ExpenseDate.Year == 2017
                                              select e;
 
             ChartDataset ds = new ChartDataset();
-            ds.data = new List<int>() { 0, 0, 0, 0, 0, 0 };
+            ds.data = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             foreach(Income i in allIncome)
             {
-                if(i.PayDay.Month == 10)
+                if(i.PayDay.Month == 1)
                 {
                     ds.data[0] += Convert.ToInt32(i.GrossPayment);
                 }
-                if (i.PayDay.Month == 11)
+                if (i.PayDay.Month == 2)
                 {
                     ds.data[1] += Convert.ToInt32(i.GrossPayment);
                 }
-                if (i.PayDay.Month == 12)
+                if (i.PayDay.Month == 3)
                 {
                     ds.data[2] += Convert.ToInt32(i.GrossPayment);
                 }
-                if (i.PayDay.Month == 1)
+                if (i.PayDay.Month == 4)
                 {
                     ds.data[3] += Convert.ToInt32(i.GrossPayment);
                 }
-                if (i.PayDay.Month == 2)
+                if (i.PayDay.Month == 5)
                 {
                     ds.data[4] += Convert.ToInt32(i.GrossPayment);
                 }
-                if (i.PayDay.Month == 3)
+                if (i.PayDay.Month == 6)
                 {
                     ds.data[5] += Convert.ToInt32(i.GrossPayment);
+                }
+                if (i.PayDay.Month == 7)
+                {
+                    ds.data[6] += Convert.ToInt32(i.GrossPayment);
+                }
+                if (i.PayDay.Month == 8)
+                {
+                    ds.data[7] += Convert.ToInt32(i.GrossPayment);
+                }
+                if (i.PayDay.Month == 9)
+                {
+                    ds.data[8] += Convert.ToInt32(i.GrossPayment);
+                }
+                if (i.PayDay.Month == 10)
+                {
+                    ds.data[9] += Convert.ToInt32(i.GrossPayment);
+                }
+                if (i.PayDay.Month == 11)
+                {
+                    ds.data[10] += Convert.ToInt32(i.GrossPayment);
+                }
+                if (i.PayDay.Month == 12)
+                {
+                    ds.data[11] += Convert.ToInt32(i.GrossPayment);
                 }
             }
 
@@ -154,32 +178,56 @@ namespace Fryebooks.Controllers
             chart.datasets.Add(ds);
 
             ChartDataset ds2 = new ChartDataset();
-            ds2.data = new List<int>() { 0, 0, 0, 0, 0, 0 };
+            ds2.data = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             foreach (Expense e in allExpense)
             {
-                if (e.ExpenseDate.Month == 10)
+                if (e.ExpenseDate.Month == 1)
                 {
                     ds2.data[0] += Convert.ToInt32(e.ExpenseAmount);
                 }
-                if (e.ExpenseDate.Month == 11)
+                if (e.ExpenseDate.Month == 2)
                 {
                     ds2.data[1] += Convert.ToInt32(e.ExpenseAmount);
                 }
-                if (e.ExpenseDate.Month == 12)
+                if (e.ExpenseDate.Month == 3)
                 {
                     ds2.data[2] += Convert.ToInt32(e.ExpenseAmount);
                 }
-                if (e.ExpenseDate.Month == 1)
+                if (e.ExpenseDate.Month == 4)
                 {
                     ds2.data[3] += Convert.ToInt32(e.ExpenseAmount);
                 }
-                if (e.ExpenseDate.Month == 2)
+                if (e.ExpenseDate.Month == 5)
                 {
                     ds2.data[4] += Convert.ToInt32(e.ExpenseAmount);
                 }
-                if (e.ExpenseDate.Month == 3)
+                if (e.ExpenseDate.Month == 6)
                 {
                     ds2.data[5] += Convert.ToInt32(e.ExpenseAmount);
+                }
+                if (e.ExpenseDate.Month == 7)
+                {
+                    ds2.data[6] += Convert.ToInt32(e.ExpenseAmount);
+                }
+                if (e.ExpenseDate.Month == 8)
+                {
+                    ds2.data[7] += Convert.ToInt32(e.ExpenseAmount);
+                }
+                if (e.ExpenseDate.Month == 9)
+                {
+                    ds2.data[9] += Convert.ToInt32(e.ExpenseAmount);
+                }
+                if (e.ExpenseDate.Month == 10)
+                {
+                    ds2.data[9] += Convert.ToInt32(e.ExpenseAmount);
+                }
+                if (e.ExpenseDate.Month == 11)
+                {
+                    ds2.data[10] += Convert.ToInt32(e.ExpenseAmount);
+                }
+                if (e.ExpenseDate.Month == 12)
+                {
+                    ds2.data[11] += Convert.ToInt32(e.ExpenseAmount);
                 }
             }
 

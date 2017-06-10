@@ -22,11 +22,18 @@
                     {
                         if (p.AuthenticationType == "Twitter")
                         {
-                            <button type="submit" class="btn btn-default fa fa-twitter" style="background-color:cornflowerblue;color:whitesmoke" id="@p.AuthenticationType" name="provider" value="  @p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                            <button type="submit" class="btn btn-default" style="background-color:cornflowerblue;color:whitesmoke" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+                                <i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+                                @p.AuthenticationType
+                            </button>
                         }
                         else
                         {
-                            <button type="submit" class="btn btn-default fa fa-google" style="background-color:red;color:whitesmoke" id="@p.AuthenticationType" name="provider" value="  @p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                            @*<button type="submit" class="btn btn-default fa fa-google" style="background-color:red;color:whitesmoke" id="@p.AuthenticationType" name="provider" value="  @p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>*@
+                            <button type="submit" class="btn btn-default" style="background-color:red;color:whitesmoke" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+                                <i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i>
+                                @p.AuthenticationType
+                            </button>
                         }
 
                         <br />
